@@ -1,0 +1,11 @@
+{% extends 'layouts/base-login.html' %}
+{% load static %}
+        {% block content %}
+        <section class="card-purchase">
+            <h1>SUCCESSFUL PURCHASE!</h1>
+            <div class="options">
+                <a href="{% url 'dashboard' %}">Return Home</a>
+                <a href="{% url 'mypurchases' %}">My purchases</a>
+            </div>
+        </section>
+{% endblock %}

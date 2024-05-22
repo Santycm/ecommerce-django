@@ -1,0 +1,24 @@
+{% if user %}
+    {% include 'layouts/base-user.html' %}
+{% else %}
+    {% include 'layouts/base.html' %}
+{% endif %}
+
+{% load static %}
+{% block content %}
+        <div class="slider-box">
+            <ul>
+                {% for item in carousel %}
+                
+                <li>
+                    <img src="{{ item.background.url  }}" alt="">
+                    <div class="text">
+                        <h2>{{ item.title }}</h2>
+                        <p>{{ item.text }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock %}
+{% include 'layouts/footer.html' %}

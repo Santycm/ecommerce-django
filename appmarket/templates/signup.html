@@ -1,0 +1,36 @@
+{% extends 'layouts/base-login.html' %}
+{% load static %}
+{% block content %}
+<section class="signup">
+    <form method="POST" class="formsignup">
+        <h2>Sign Up</h2>
+        {% csrf_token %}
+        <div class="inputsignup">
+            {% for field in form%}
+            {{ field }}
+            {% endfor%}
+            <div>
+                <input type="submit" value="Submit" class="btn-submit">
+                <p>Are you registered? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </div>
+    </form>
+
+</section>
+<script>
+    const pass1 = document.getElementById('id_password');
+    const pass2 = document.getElementById('id_cpassword');
+
+    pass1.addEventListener('input', () => {
+        pass2.addEventListener('input', () => {
+            if(pass1.value !== pass2.value){
+                pass1.style.borderColor = "red"
+                pass2.style.borderColor = "red"
+            }else{
+                pass1.style.borderColor = "green"
+                pass2.style.borderColor = "green"
+            }
+        });
+    });
+</script>
+{% endblock%}

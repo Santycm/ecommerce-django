@@ -1,0 +1,46 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="welcomeuser">
+        {% for item in user %}
+        <h2>Welcome {{item.name}} {{item.lname}}</h2>
+        {% endfor %}
+    </section>
+    <section class="products">
+        <div class="phead">
+            <h3>Your Products</h3>
+            <a href="{% url 'mypurchases' %}"><button class="btnadd">MY PURCHASES</button></a>
+            <a href="{% url 'addproduct' %}"><button class="btnadd">ADD</button></a>
+        </div>
+        {% for product_category, products in products.items%}
+        <div class="lbl-category">
+            <h4>📌 CATEGORY : {{product_category}}</h4>
+        </div>
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </thead>
+                <tbody>
+                    {%for product in products%}
+                    <tr class="tbody">
+                        <td class="text1">{{product.name}}</td>
+                        <td class="text2">{{product.stock}}</td>
+                        <td class="text2">${{product.price}}</td>
+                        <td class="text2"><a href="{% url 'updateproduct' id=product.id %}"><button
+                                    class="btn-update">UPDATE</button></a> <a
+                                href="{% url 'deleteproduct' id=product.id %}"><button
+                                    class="btn-delete">DELETE</button></a> <a href="{% url 'product' id=product.id %}"><button class="btn-view">VIEW</button></a></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+        </table>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}
+{% include 'layouts/footer.html' %}

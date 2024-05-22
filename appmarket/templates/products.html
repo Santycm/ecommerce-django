@@ -1,0 +1,31 @@
+{% if user %}
+    {% include 'layouts/base-user.html' %}
+{% else %}
+    {% include 'layouts/base.html' %}
+{% endif %}
+
+{% load static %}
+{% block content %}
+
+<section class="productbackground">
+    <div class="products-section">
+        {% for item in products %}
+        <div class="card-product">
+            <div class="img-product">
+                <img src="{{ item.photo.url }}" alt="">
+            </div>
+            <div class="txt-product">
+                <h2>{{item.name | slice:"30" }}...</h2>
+                <div class="card-category">
+                    <h4>{{item.category}}</h4>
+                </div>
+                <h5>$ {{item.price}}</h5>
+                <a href="{% url 'product' id=item.id %}"><button>MORE</button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+        
+{% endblock %}
+{% include 'layouts/footer.html' %}

@@ -1,0 +1,25 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="dshproduct">
+        <h2>UPDATE PRODUCT</h2>
+        <a href="{% url 'dashboard' %}"><button class="btnreturn">Return</button></a>
+    </section>
+    <section class="addcontainer">
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <h3>Update information about your product</h3>
+                {% for field in form%}
+                    {{ field }}
+                {% endfor%}
+            <input type="submit" value="Submit" class="btn-submit">
+            </div>
+        </form>
+    </section>
+</main>
+
+{% endblock %}
+{% include 'layouts/footer.html' %}

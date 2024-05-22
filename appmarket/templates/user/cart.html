@@ -1,0 +1,97 @@
+{% if user %}
+    {% include 'layouts/base-user.html' %}
+{% else %}
+    {% include 'layouts/base.html' %}
+{% endif %}
+
+{% load static %}
+{% block content %}
+<section class="productbackground-single">
+        <form method="POST"">
+            
+        <table class="cart-tab" id="cart">
+            <thead>
+                <th>ID</th>
+                <th>Dealer</th>
+                <th>Product</th>
+                <th>Base Price</th>
+                <th>Amount</th>
+                <th>Total Price</th>
+            </thead>
+            <tbody>
+                
+                    {% for item in products %}
+                    <tr>
+                        {% csrf_token %}
+                        <td><input type="text" name="id[]" value="{{item.id}}" class="non"></td>
+                        <td><input type="text" name="dealer[]" value="{{item.user}}" class="non"></td>
+                        <td> <input type="text" value="{{item.name}}" name="product[]" class="non"></td>
+                        <td><input type="text" value="{{item.price}}" name="price[]" class="non"></td>
+                        <td class="count"><input onclick="showTotal({{item.price}}, {{item.id}})" type="number" name="count[]" id="amount-{{item.id}}" class="amount" min="1" max="{{item.stock}}"></td>
+                        <td><span id="totalp-{{item.id}}" class="totalp">{{item.price}}</span></td>
+                    </tr>
+                    {% endfor %}
+                
+                
+            </tbody>
+        </table>
+        <section>
+            <div class="summary">
+                <div>
+                    <h2>Summary</h2>
+                    <p>TOTAL ITEMS: <span id="totalpr">0</span></p>
+                    <p>TOTAL CHECK: <span id="totalc">0</span></p>
+                </div>
+                <div>
+                    <input class="btnreturn" type="submit" value="PURCHASE">
+                    <a href="{% url 'cleancart' %}" class="btnreturn" style="text-decoration: none; background-color: black; border-color: black;">CLEAN</a>
+                </div>
+            </div>
+        </section>
+    </form>
+</section>
+
+<script>
+    const inputs = document.querySelectorAll('.amount');
+    const pricep = document.querySelectorAll('.totalp');
+    const totalcheck = document.getElementById('totalc');
+    const totalpr = document.getElementById('totalpr');
+    // const finish = document.getElementById('finish');
+    
+    function calcTotalItems(){
+        let total = 0;
+        inputs.forEach(input =>{
+            total += parseFloat(input.value) || 0;
+        });
+        totalpr.textContent = total;
+    }
+
+    function calcTotalPrice(){
+        let total = 0;
+        pricep.forEach(price =>{
+            total += parseFloat(price.textContent) || 0;
+        });
+        totalcheck.textContent = total;
+    }
+    
+    function showTotal(price, id){
+        let lowValue = document.getElementById(`amount-${id}`).value;
+        let count = parseFloat(document.getElementById(`amount-${id}`).value);
+        lowValue -=1;
+        let newPrice = 0;
+        if(count> lowValue){
+            newPrice = count * price;
+        }else if(count < lowValue){
+            newPrice = lowValue * price
+        }
+
+        const total = document.getElementById(`totalp-${id}`);
+        total.textContent = newPrice;
+
+        calcTotalItems();
+        calcTotalPrice();
+    }
+</script>
+
+{% endblock %}
+{% include 'layouts/footer.html' %}

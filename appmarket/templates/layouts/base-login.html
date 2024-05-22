@@ -1,0 +1,20 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/icon.svg' %}" type="image/x-icon">
+    <title>{{pageTitle}} | Marketplace</title>
+</head>
+<body>
+    <main>
+        <div class="icon-return">
+            <a href="{% url 'index' %}" class="button-return"><img src="{% static 'img/icon.svg' %}" alt=""></a>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

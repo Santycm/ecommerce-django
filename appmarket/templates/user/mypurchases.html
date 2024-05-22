@@ -1,0 +1,50 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="welcomeuser">
+        {% for item in user %}
+        <h2>Welcome {{item.name}} {{item.lname}}</h2>
+        {% endfor %}
+    </section>
+    <section class="products">
+        <div class="phead">
+            <h3>Your Purchases</h3>
+            <a href="{% url 'dashboard' %}"><button class="btnadd">MY PRODUCTS</button></a>
+        </div>
+        
+        {% for date_purchase, entries in historial_dict.items %}
+        <div class="purchase-info">
+            <div class="date-row">
+                <h5>{{date_purchase}}</h5>
+            </div>
+            
+            <table class="cart-tab">
+                <thead>
+                    <th>Time</th>
+                    <th>Dealer</th>
+                    <th>Product</th>
+                    <th>Base price</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                    <tr>
+                        <td>{{entry.time}}</td>
+                        <td>{{entry.dealer}}</td>
+                        <td>{{entry.product.name}}</td>
+                        <td>{{entry.product.price}}</td>
+                        <td>{{entry.amount}}</td>
+                        <td>$ {{entry.total}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+
+    </section>
+</main>
+{% endblock %}
+{% include 'layouts/footer.html' %}

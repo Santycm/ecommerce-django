@@ -1,0 +1,19 @@
+{% extends 'layouts/base-login.html' %}
+{% load static %}
+        {% block content %}
+        <section class="register">
+            
+            <form method="POST" class="formuser">
+                <h2>Login</h2>
+                {% csrf_token %}
+                <div class="inputs">
+                {% for field in form%}
+                    {{ field }}
+                {% endfor%}
+                <input type="submit" value="Submit" class="btn-submit">
+                <p>Aren't you registered? <a href="{% url 'signup' %}">Sign-Up</a></p>
+                </div>
+            </form>
+        </section>
+        {% endblock %}
+

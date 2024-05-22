@@ -1,0 +1,26 @@
+{% if user %}
+    {% include 'layouts/base-user.html' %}
+{% else %}
+    {% include 'layouts/base.html' %}
+{% endif %}
+
+{% load static %}
+{% block content %}
+    <section class="productbackground-single">
+        <div class="productcontainer">
+            <div class="product-info">
+                <h1>{{product.name}}</h1>
+                <div class="productcat">
+                    <h4>{{product.category}}</h4>
+                </div>
+                <p>{{product.description}}</p>
+                    <h3>$ {{product.price}}</h3>
+                <a href="{% url 'addcart' id=product.id %}"><button class="buy">BUY</button></a>
+            </div>
+            <div class="product-image">
+                <img src="{{ product.photo.url }}" alt="">
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% include 'layouts/footer.html' %}
