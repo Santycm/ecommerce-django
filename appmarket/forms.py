@@ -1,18 +1,44 @@
 from django import forms
-from .models import Category, Product
+from .models import Category, Product, Carousel
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
 
-class SignUpForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Name'}))
-    lname = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
-    email = forms.CharField(widget=forms.EmailInput(attrs={'placeholder':'Email'}))
-    telephone = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Telephone'}))
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
-    cpassword = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm your password'}))
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username and password:
+            self.user = authenticate(username=username, password=password)
+            if not self.user:
+                raise forms.ValidationError('Incorrect credentials')
+        return self.cleaned_data
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'is_staff', 'is_superuser']
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['category', 'background']
+        widgets = {
+            'category':forms.TextInput(attrs={'placeholder':'Title'})
+        }  
+
+class CarouselForm(forms.ModelForm):  
+    class Meta:
+        model = Carousel
+        fields = ['title', 'text', 'background']
+        widgets = {
+            'title':forms.TextInput(attrs={'placeholder':'Title'}),
+            'text':forms.Textarea(attrs={'placeholder':'Text'})
+        }    
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -24,12 +50,7 @@ class ProductForm(forms.ModelForm):
             'stock':forms.NumberInput(attrs={'placeholder':'Stock'}),
             'price':forms.NumberInput(attrs={'placeholder':'Price'})
         }    
-    
 
-class UpdateProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ['category', 'name', 'description', 'stock', 'price', 'photo']
 
 
    

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Carousel(models.Model):
@@ -9,17 +10,6 @@ class Carousel(models.Model):
     def __str__(self):
         return self.title
 
-class Users(models.Model):
-    name = models.CharField(max_length=255)
-    lname = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    telephone = models.CharField(max_length=255)
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
 class Category(models.Model):
     category = models.CharField(max_length=255)
     background = models.ImageField(upload_to='categories/')
@@ -28,7 +18,7 @@ class Category(models.Model):
         return self.category
      
 class Product(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -40,8 +30,8 @@ class Product(models.Model):
         return self.description
 
 class ProductSold(models.Model):
-    dealer = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='sales_made', default=None)
-    customer = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='sales_received', default=None)
+    dealer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sales_made', default=None)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sales_received', default=None)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()
     total = models.FloatField(default=None)

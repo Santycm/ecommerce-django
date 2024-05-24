@@ -226,7 +226,6 @@ nav {
 }
 
 .inputsignup {
-    padding-top: 50px;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -236,7 +235,6 @@ nav {
 
     input {
         margin: 10px;
-        margin-bottom: 20px;
         border-style: none;
         height: 50px;
         background-color: black;
@@ -258,14 +256,41 @@ nav {
             background-color: purple;
             cursor: pointer;
         }
+    }
 
+    .inputs{
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+        
+        p{
+            color: rgb(134, 134, 134);
+            padding-left: 10px;
+        }
     }
 
     p {
         font-size: 10px;
-        color: white;
+        color: black;
     }
 
+    ul{
+        color: rgb(134, 134, 134); 
+        text-decoration: none; 
+        font-size: 10px;
+        padding-left: 10px;
+
+    }
+
+}
+
+.checkbox-group{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .welcomeuser {
@@ -675,8 +700,7 @@ main .addcontainer {
         background-color: #5E4352;
         color: white;
     }
-
-
+    
     tr {
         color: white;
         .text1 {
@@ -692,7 +716,6 @@ main .addcontainer {
         text-align: center;
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-right: 10px;
         padding-left: 10px;
 
         .non{
@@ -700,18 +723,23 @@ main .addcontainer {
             border-style: none;
             color: white;
             pointer-events: none;
+        }
 
+        .small{
+            width: 20px;
+        }
+
+        .medium{
+            width: 100px;
         }
 
         
 
         .amount{
             margin: auto;
-            width: 20%;
             background-color: #c27d44;
             border-style: solid;
             border-radius: 5px;
-            border: 0;
             color: white;
         }
 
@@ -721,6 +749,10 @@ main .addcontainer {
         text-align: center;
     }
 
+}
+
+.id_product{
+    width: 10px;
 }
 
 .cart-tab:hover tbody tr:hover {
@@ -886,3 +918,29 @@ main .addcontainer {
     color: white;
 }
 
+.btn-admin{
+    background-color: white;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.container-admin{
+    padding-top: 30px;
+    padding-left: 54px;
+    padding-right: 54px;
+    padding-bottom: 30px;
+}
+
+.buttons-section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
