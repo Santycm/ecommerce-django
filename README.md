@@ -8,5 +8,4 @@
 6. install pillow: python -m pip install Pillow
 7. create db_market in postgre
 8. migrate to postgre: python manage.py migrate
-9. create superuser: python manage.py createsuperuser
 10. run server: python manage.py runserver
