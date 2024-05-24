@@ -1,0 +1,43 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="welcomeuser">
+        {% for item in user %}
+        <h2>Welcome {{item.name}} {{item.lname}}</h2>
+        {% endfor %}
+    </section>
+    <section class="container-admin">
+        <div>
+            <h3>Options</h3>
+            <div class="buttons-section">
+                <a href="{% url 'adminsite' %}" class="btn-admin">Users</a><a href="{% url 'addslider' %}" class="btn-admin">Add Slider</a><a href="{% url 'categories' %}" class="btn-admin">Categories</a>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </thead>
+                    <tbody>
+                        {% for slider in carousel %}
+                        <tr class="tbody">
+                            <td class="text1">{{slider.id}}</td>
+                            <td class="text2">{{slider.title}}</td>
+                            <td class="text2">{{slider.description}}</td>
+                            <td class="text2"><a href="{% url 'updateslider' id=slider.id %}"><button
+                                class="btn-update">UPDATE</button></a> <a
+                            href="{% url 'deleteslider' id=slider.id %}"><button
+                                class="btn-delete">DELETE</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% include 'layouts/footer.html' %}

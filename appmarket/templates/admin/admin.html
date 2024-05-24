@@ -1,0 +1,45 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="welcomeuser">
+        {% for item in user %}
+        <h2>Welcome {{item.name}} {{item.lname}}</h2>
+        {% endfor %}
+    </section>
+    <section class="container-admin">
+        <div>
+            <h3>Options</h3>
+            <div class="buttons-section">
+                <a href="" class="btn-admin">Users</a><a href="{% url 'sliders' %}" class="btn-admin">Sliders</a><a href="{% url 'categories' %}" class="btn-admin">Categories</a>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>Superuser</th>
+                    <th>Username</th>
+                    <th class="text1">First Name</th>
+                    <th class="text1">Last Name</th>
+                    <th class="text1">Email</th>
+                    <th class="text1">Last Active</th>
+                    <th class="text2">BAN</th>
+                </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr class="tbody">
+                            <td class="text1">{{user.is_superuser}}</td>
+                            <td class="text1">{{user.username}}</td>
+                            <td class="text1">{{user.first_name}}</td>
+                            <td class="text1">{{user.last_name}}</td>
+                            <td class="text1">{{user.email}}</td>
+                            <td class="text1">{{user.last_login}}</td>
+                            <td class="text2"><a href="{% url 'deleteuser' id=user.id %}"><button class="btn-delete">DELETE</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

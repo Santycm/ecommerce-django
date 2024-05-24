@@ -6,31 +6,113 @@
         <h2>Sign Up</h2>
         {% csrf_token %}
         <div class="inputsignup">
-            {% for field in form%}
-            {{ field }}
-            {% endfor%}
+            <div class="inputs">
+                <input type="text" name="{{form.first_name.name}}" placeholder="First Name">
+            </div>
+            <div class="inputs">
+                <input type="text" name="{{form.last_name.name}}" placeholder="Last Name">
+            </div>
+            <div class="inputs">
+                <input type="text" name="{{form.email.name}}" placeholder="Email" id="email">
+                <p>Must have @domain.com</p>
+            </div>
+            <div class="inputs">
+                <input type="text" name="{{form.username.name}}" placeholder="Username" id="username">
+                <p>Must have any character (@.+*)</p>
+            </div>
+            <div class="inputs">
+                <input type="password" name="{{form.password1.name}}" placeholder="Your password" id="password1">
+                <p>Min 8 Characters, must contains a upper and lower letter, a number and any character (@.+*)</p>
+            </div>
+            <div class="inputs">
+                <input type="password" name="{{form.password2.name}}" placeholder="Confirm your password"
+                    id="password2">
+                <p>Min 8 Characters, must contains a upper and lower letter, a number and any character (@ * . _ - )</p>
+            </div>
+            <div class="inputs">
+                <div class="checkbox-group">
+                    <label for="{{form.is_staff.name}}" style="color: white;">Admin Django site?</label>
+                    <input type="checkbox" name="{{form.is_staff.name}}">
+                    <label for="{{form.is_superuser.name}}" style="color: white;">Superuser?</label>
+                    <input type="checkbox" name="{{form.is_superuser.name}}">
+                </div>
+                <ul>
+                    <li>Select superuser if you site administrator (add items to page)</li>
+                    <li>Select super user and admin Django site if you db administrator</li>
+                </ul>
+            </div>
+
             <div>
                 <input type="submit" value="Submit" class="btn-submit">
-                <p>Are you registered? <a href="{% url 'login' %}">Login</a></p>
+                <p style="color: white;">Are you registered? <a href="{% url 'login' %}">Login</a></p>
             </div>
         </div>
     </form>
 
 </section>
 <script>
-    const pass1 = document.getElementById('id_password');
-    const pass2 = document.getElementById('id_cpassword');
+    const pass1 = document.getElementById('password1');
+    const pass2 = document.getElementById('password2');
+    const iemail = document.getElementById('email');
+    const iusername = document.getElementById('username');
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\@]+$/;
+        return re.test(email);
+    }
+
+    function validateUserName(username) {
+        const re = /[@.+\*)]/;
+        return re.test(username)
+    }
+
+    function validatePassword(password) {
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/
+        return re.test(password)
+    }
+
+    iemail.addEventListener('input', () => {
+        const email = iemail.value;
+
+        if (!validateEmail(email)) {
+            iemail.style.borderColor = "red";
+        } else {
+            iemail.style.borderColor = "green";
+        }
+    });
+
+    iusername.addEventListener('input', () => {
+        const username = iusername.value;
+
+        if (!validateUserName(username)) {
+            iusername.style.borderColor = "red";
+        } else {
+            iusername.style.borderColor = "green";
+        }
+    });
 
     pass1.addEventListener('input', () => {
+        if (!validatePassword(pass1.value)) {
+            pass1.style.borderColor = "red"
+        } else {
+            pass1.style.borderColor = "green";
+        }
         pass2.addEventListener('input', () => {
-            if(pass1.value !== pass2.value){
+            if (!validatePassword(pass2.value)) {
+                pass2.style.borderColor = "red"
+            } else {
+                pass2.style.borderColor = "green";
+            }
+            if (pass1.value !== pass2.value) {
                 pass1.style.borderColor = "red"
                 pass2.style.borderColor = "red"
-            }else{
+            } else {
                 pass1.style.borderColor = "green"
                 pass2.style.borderColor = "green"
             }
         });
     });
+
+
 </script>
 {% endblock%}

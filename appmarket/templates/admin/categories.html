@@ -1,0 +1,43 @@
+{% extends 'layouts/base-user.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <section class="welcomeuser">
+        {% for item in user %}
+        <h2>Welcome {{item.name}} {{item.lname}}</h2>
+        {% endfor %}
+    </section>
+    <section class="container-admin">
+        <div>
+            <h3>Options</h3>
+            <div class="buttons-section">
+                <a href="{% url 'adminsite' %}" class="btn-admin">Users</a><a href="{% url 'sliders' %}" class="btn-admin">Sliders</a><a href="{% url 'addcategory' %}" class="btn-admin">Add Category</a>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Products</th>
+                    <th>Actions</th>
+                </thead>
+                    <tbody>
+                        {% for item in categories %}
+                        <tr class="tbody">
+                            <td class="text1">{{item.category.id}}</td>
+                            <td class="text2">{{item.category.category}}</td>
+                            <td class="text2">{{item.nproducts}}</td>
+                            <td class="text2"><a href="{% url 'updatecategory' id=item.category.id %}"><button
+                                class="btn-update">UPDATE</button></a> <a
+                            href="{% url 'deletecategory' id=item.category.id %}"><button
+                                class="btn-delete">DELETE</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% include 'layouts/footer.html' %}

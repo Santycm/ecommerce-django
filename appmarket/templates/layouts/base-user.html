@@ -26,9 +26,18 @@
                 </li>
             </ul>
             <ul class="side-b">
+                {% for item in user %}
+                {% if item.is_superuser %}
+                <li>
+                    <a href="{% url 'adminsite' %}"><img src="{% static 'img/user.svg' %}" alt="" class="login-icon"></a>
+                </li>
+                {% else %}
                 <li>
                     <a href="{% url 'dashboard' %}"><img src="{% static 'img/user.svg' %}" alt="" class="login-icon"></a>
                 </li>
+                {% endif %}
+                {% endfor %}
+                
                 <li>
                     <a href="{% url 'cart' %}"><img src="{% static 'img/cart.svg' %}" alt="" class="cart-icon"></a>
                 </li>

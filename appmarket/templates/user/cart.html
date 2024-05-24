@@ -23,10 +23,10 @@
                     {% for item in products %}
                     <tr>
                         {% csrf_token %}
-                        <td><input type="text" name="id[]" value="{{item.id}}" class="non"></td>
-                        <td><input type="text" name="dealer[]" value="{{item.user}}" class="non"></td>
+                        <td><input type="text" name="id[]" value="{{item.id}}" class="non small"></td>
+                        <td><input type="text" name="dealer[]" value="{{item.user}}" class="non medium"></td>
                         <td> <input type="text" value="{{item.name}}" name="product[]" class="non"></td>
-                        <td><input type="text" value="{{item.price}}" name="price[]" class="non"></td>
+                        <td><input type="text" value="{{item.price}}" name="price[]" class="non medium"></td>
                         <td class="count"><input onclick="showTotal({{item.price}}, {{item.id}})" type="number" name="count[]" id="amount-{{item.id}}" class="amount" min="1" max="{{item.stock}}"></td>
                         <td><span id="totalp-{{item.id}}" class="totalp">{{item.price}}</span></td>
                     </tr>

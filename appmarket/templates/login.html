@@ -10,8 +10,10 @@
                 {% for field in form%}
                     {{ field }}
                 {% endfor%}
+                <h7 style="color: red;">{{error}}</h7>
                 <input type="submit" value="Submit" class="btn-submit">
                 <p>Aren't you registered? <a href="{% url 'signup' %}">Sign-Up</a></p>
+                
                 </div>
             </form>
         </section>
