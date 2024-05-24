@@ -6,19 +6,58 @@
 
 {% load static %}
 {% block content %}
-        <div class="slider-box">
-            <ul>
-                {% for item in carousel %}
-                
-                <li>
-                    <img src="{{ item.background.url  }}" alt="">
-                    <div class="text">
-                        <h2>{{ item.title }}</h2>
-                        <p>{{ item.text }}</p>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+<section>
+    <div class="slider-box">
+        <ul>
+            {% for item in carousel %}
+            
+            <li>
+                <img src="{{ item.background.url }}" alt="">
+                <div class="text">
+                    <h2>{{ item.title }}</h2>
+                    <p>{{ item.text }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+<section class="categories-section">
+    <h2>Categories</h2>
+    <div class="category-section">
+        
+        {% for category in categories %}
+        <div class="category-card">
+            <img src="{{ category.background.url }}" alt="" class="category-card-image">
+            <div class="category-card-overlay">
+                <h2>{{ category.category }}</h2>
+            </div>
+           
         </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="products_section">
+    <h2 class="title">Products</h2>
+    <div class="products-section">
+        {% for item in products %}
+        <div class="card-product">
+            <div class="img-product">
+                <img src="{{ item.photo.url }}" alt="">
+            </div>
+            <div class="txt-product">
+                <h2>{{item.name | slice:"30" }}...</h2>
+                <div class="card-category">
+                    <h4>{{item.category}}</h4>
+                </div>
+                <h5>$ {{item.price}}</h5>
+                <a href="{% url 'product' id=item.id %}"><button>MORE</button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+        
+        
 {% endblock %}
 {% include 'layouts/footer.html' %}

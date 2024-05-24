@@ -1,3 +1,9 @@
+body{
+    overflow-x: hidden;
+}
+html{
+    overflow-x: hidden;
+}
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
@@ -599,7 +605,7 @@ main .addcontainer {
 
 
 
-    padding-top: 10%;
+    padding-top: 100px;
     padding-left: 10%;
     padding-right: 10%;
     width: 100%;
@@ -784,9 +790,10 @@ main .addcontainer {
 .products-section{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 5%;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    width: 80%;
     margin: auto;
     gap: 10px;
 }
@@ -794,7 +801,6 @@ main .addcontainer {
 .card-product{
     
     .img-product{
-        width: 300px;
         height: 300px;
         border-style: solid;
         border-color: black;
@@ -943,4 +949,86 @@ main .addcontainer {
     display: flex;
     flex-direction: row;
     gap: 5px;
+}
+
+.category-section{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+    justify-content: center;
+
+}
+
+.category-card{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.category-card-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-card-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.category-card-overlay h2{
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.categories-section{
+    padding-top: 20px;
+    h2{
+        padding-bottom: 20px;
+        font-size: 32px;
+        font-weight: bolder;
+    }
+    text-align: center;
+}
+
+.category-card:hover .category-card-image{
+    filter: blur(5px);
+}
+
+
+
+.products_section{
+    .title{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bolder;
+    }
+}
+
+.categories-sec-page{
+    padding-top: 50px;
+}
+
+.products-sec-cat{
+    align-items: center;
+    h2{
+        padding-bottom: 20px;
+        font-size: 32px;
+        font-weight: bolder;
+        text-align: center;
+    }
 }

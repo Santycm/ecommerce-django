@@ -12,8 +12,24 @@ from django.contrib.auth.models import User
 # Create your views here.
 def showIndex(request):
     pageTitle = 'Home'
-    queryset = Carousel.objects.all()
-    return render(request, 'index.html', {'pageTitle': pageTitle, 'carousel':queryset, 'user':userInfo})
+    carousels = Carousel.objects.all()
+    categories = Category.objects.all()
+    products = Product.objects.all()
+
+    return render(request, 'index.html', {'pageTitle': pageTitle, 'carousel':carousels, 'user':userInfo, 'categories':categories, 'products':products})
+
+def showCategoriesPage(request):
+    pageTitle = 'Categories'
+    categories = Category.objects.all()
+    products = Product.objects.all()
+
+    products_category ={}
+    for product in products:
+        if product.category not in products_category:
+            products_category[product.category] = []
+        products_category[product.category].append(product)
+
+    return render(request, 'categories.html', {'pageTitle': pageTitle, 'user':userInfo, 'categories':categories, 'products':products_category})
 
 def showLogin(request):
     userInfo.clear()
