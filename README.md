@@ -6,7 +6,7 @@
 3. install django: python -m pip install django
 4. install psycopg2: python -m pip install psycopg2
 5. install pillow: python -m pip install Pillow
-6. install jazzmin: python -m pip install -U django-jazzmin
+6. install jazzmin: pip install -U django-jazzmin
 7. create db_market in postgre
 8. migrate to postgre: python manage.py migrate
 9. run server: python manage.py runserver
