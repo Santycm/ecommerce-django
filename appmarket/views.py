@@ -195,7 +195,7 @@ def updateProduct(request, id):
             return redirect('dashboard')
     else:
         form = ProductForm(instance=product)
-    return render(request, 'user/updateproduct.html', {'form':form, 'pageTitle':pageTitle}) 
+    return render(request, 'user/updateproduct.html', {'form':form, 'pageTitle':pageTitle, 'user':userInfo}) 
 
 def viewProduct(request, id):
     product = get_object_or_404(Product, id=id)
